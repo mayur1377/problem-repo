@@ -11,12 +11,21 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private UserContext userContext; 
+
     public User registerUser(User user) {
         return userRepository.save(user);
     }
 
-    public Optional<User> loginUser(String phoneNumber) {
-        return userRepository.findByPhoneNumber(phoneNumber);
+    public User loginUser(String phoneNumber) {
+        Optional<User> userOptional = userRepository.findByPhoneNumber(phoneNumber);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            userContext.setCurrentUser(user);
+            return user;
+        }
+        return null;
     }
 
     public Iterable<User> getAllUsers() {
