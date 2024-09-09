@@ -9,6 +9,7 @@ import lombok.Setter;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import java.util.List;
+import java.util.ArrayList;
 
 @Entity
 @Getter
@@ -18,11 +19,13 @@ import java.util.List;
 public class Restaurant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; // Unique identifier for each restaurant
+    private Long id; 
 
     private String name;
     private List<String> pincode;
     private String foodItem;
     private int foodPrice;
-    private int foodQuantity; // Field name
+    private int foodQuantity; 
+    private List<Integer> rating = new ArrayList<Integer>();
+    private List<String> reviews = new ArrayList<String>();
 }
